@@ -4,6 +4,7 @@ import { NbCardModule, NbTreeGridModule, NbIconModule, NbInputModule } from '@ne
 import { ThemeModule } from '../../@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdministracionRoutingModule, routedComponents } from './administracion-routing.module';
+import { FormComponent } from './empresas/form.component';
 
 
 
@@ -19,6 +20,7 @@ import { AdministracionRoutingModule, routedComponents } from './administracion-
   ],
   declarations: [
     ...routedComponents,
+    FormComponent,
   ],
 })
 export class AdministracionModule { }

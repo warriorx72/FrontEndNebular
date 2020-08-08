@@ -1,19 +1,18 @@
-import { Component, ɵConsole, ViewChild } from '@angular/core';
+import { Component, ɵConsole, ViewChild, OnInit } from '@angular/core';
 import { LocalDataSource, Ng2SmartTableComponent } from 'ng2-smart-table';
 import { SmartTableData } from '../../../@core/data/smart-table';
-import {EMPRESAS} from './empresas.json';
+import { EMPRESAS } from './empresas.json';
 import { Empresa } from './empresa';
+import { EmpresaService } from './empresa.service';
 @Component({
   selector: 'ngx-empresas',
   templateUrl: './empresas.component.html',
   styleUrls: ['./empresas.component.scss'],
 })
-export class EmpresasComponent {
-
+export class EmpresasComponent implements OnInit{
   @ViewChild('table')
   smartTable: Ng2SmartTableComponent;
-empresas: Empresa[];
-settings = {
+  settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       confirmCreate: true,
@@ -28,23 +27,17 @@ settings = {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
+      idText: {
+        title: 'Folio',
       },
-      firstName: {
-        title: 'First Name',
+      nombreRazonSocial: {
+        title: 'Razon Social',
       },
-      lastName: {
-        title: 'Last Name',
+      giroComercial: {
+        title: 'Giro',
       },
-      username: {
-        title: 'Username',
-      },
-      email: {
-        title: 'E-mail',
-      },
-      age: {
-        title: 'Age',
+      cargo: {
+        title: 'Cargo',
       },
     },
     mode: 'external',
@@ -52,28 +45,29 @@ settings = {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
-    const data = this.service.getData();
-    // tslint:disable-next-line: no-console
-    console.log(data);
-    this.empresas = EMPRESAS;
-    this.source.load(this.empresas);
+  constructor( private empresaService: EmpresaService) {
+    //this.source.load(this.empresas);
+  }
+  ngOnInit(): void {
+    this.empresaService.getEmpresas().subscribe(
+      empresas => this.source.load(empresas),
+    );
   }
 
   onDeleteConfirm(event): void {
-console.log('vamos a mamamsiar');
+    console.log('vamos a mamamsiar');
   }
 
   ngAfterViewInit(): void {
     console.log('Values on ngAfterViewInit():');
-    this.smartTable.edit.subscribe( (dataObject: any) => {
+    this.smartTable.edit.subscribe((dataObject: any) => {
       console.log('Edit');
     });
-    this.smartTable.delete.subscribe( (dataObject: any) => {
+    this.smartTable.delete.subscribe((dataObject: any) => {
       console.log('Delete');
 
     });
-    this.smartTable.create.subscribe( (dataObject: any) => {
+    this.smartTable.create.subscribe((dataObject: any) => {
       console.log('Create');
     });
   }
