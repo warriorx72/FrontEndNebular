@@ -5,6 +5,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdministracionRoutingModule, routedComponents } from './administracion-routing.module';
 import { FormComponent } from './empresas/form.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
 
 
 
@@ -21,6 +22,7 @@ import { FormComponent } from './empresas/form.component';
   declarations: [
     ...routedComponents,
     FormComponent,
+    EmpleadosComponent,
   ],
 })
 export class AdministracionModule { }
