@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbTreeGridModule, NbIconModule, NbInputModule } from '@nebular/theme';
+import {
+  NbCardModule, NbTreeGridModule,
+  NbIconModule, NbInputModule, NbCheckboxModule, NbButtonModule, NbDatepickerModule,
+} from '@nebular/theme';
 import { ThemeModule } from '../../@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AdministracionRoutingModule, routedComponents } from './administracion-routing.module';
 import { FormComponent } from './empresas/form.component';
-import { EmpleadosComponent } from './empleados/empleados.component';
-
-
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,13 +16,16 @@ import { EmpleadosComponent } from './empleados/empleados.component';
     NbIconModule,
     NbInputModule,
     ThemeModule,
+    NbButtonModule,
+    FormsModule,
     AdministracionRoutingModule,
     Ng2SmartTableModule,
+    NbCheckboxModule,
+    NbDatepickerModule,
   ],
   declarations: [
     ...routedComponents,
     FormComponent,
-    EmpleadosComponent,
   ],
 })
 export class AdministracionModule { }

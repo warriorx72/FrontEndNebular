@@ -1,12 +1,18 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { LocalDataSource, Ng2SmartTableComponent } from 'ng2-smart-table';
+// import { SmartTableData } from '../../../@core/data/smart-table';
+// import { EMPRESAS } from './empresas.json';
+import { Empresa } from './empresa';
 import { EmpresaService } from './empresa.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-empresas',
   templateUrl: './empresas.component.html',
   styleUrls: ['./empresas.component.scss'],
 })
 export class EmpresasComponent implements OnInit {
+  empresas: Empresa[];
+
   @ViewChild('table')
   smartTable: Ng2SmartTableComponent;
   settings = {
@@ -42,35 +48,35 @@ export class EmpresasComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor( private empresaService: EmpresaService) {
+  constructor(private empresaService: EmpresaService,
+    private router: Router) {
   }
   ngOnInit(): void {
     this.empresaService.getEmpresas().subscribe(
-      empresas => this.source.load(empresas),
+      empresas => {
+        this.source.load(empresas);
+        this.empresas = empresas;
+      },
     );
   }
 
   onDeleteConfirm(event): void {
-    // tslint:disable-next-line: no-console
-    console.log('vamos a mamamsiar');
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngAfterViewInit(): void {
-    // tslint:disable-next-line: no-console
-    console.log('Values on ngAfterViewInit():');
     this.smartTable.edit.subscribe((dataObject: any) => {
-      // tslint:disable-next-line: no-console
-      console.log('Edit');
+      this.router.navigate(['/pages/administracion/empresas/form', dataObject.data.id]);
     });
     this.smartTable.delete.subscribe((dataObject: any) => {
-      // tslint:disable-next-line: no-console
-      console.log('Delete');
-
+      this.empresaService.deleteEmpresa(dataObject.data).subscribe(
+        response => {
+          this.empresas = this.empresas.filter(emp => emp !== dataObject.data);
+          this.source.load(this.empresas);
+        });
     });
     this.smartTable.create.subscribe((dataObject: any) => {
-      // tslint:disable-next-line: no-console
-      console.log('Create');
+      this.router.navigate(['/pages/administracion/empresas/form']);
     });
   }
 }

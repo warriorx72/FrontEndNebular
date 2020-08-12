@@ -1,1 +1,120 @@
-<p>form works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>Block form</nb-card-header>
+      <nb-card-body>
+        <form>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="giroComercial" class="label">Giro Comercial</label>
+                <input type="text" nbInput fullWidth id="giroComercial" name="giroComercial" placeholder="Comercial"
+                  [(ngModel)]="empresa.giroComercial">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="nombre" class="label">Nombre &oacute; raz&oacute;n social</label>
+                <input type="text" nbInput fullWidth id="nombre" name="nombre" placeholder="Patito S.A. de C.V."
+                  [(ngModel)]="empresa.nombreRazonSocial">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="codigoSat" class="label">Codigo SAT</label>
+                <input type="number" nbInput fullWidth id="codigoSat" name="codigoSat" placeholder="132"
+                  [(ngModel)]="empresa.codigoSat">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="regimen" class="label">Regimen</label>
+                <input type="text" nbInput fullWidth id="regimen" name="regimen"
+                  placeholder="Persona Moral del r&eacute;gimen general" [(ngModel)]="empresa.regimen">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="fechaAlta" class="label">Fecha de alta</label>
+                <input nbInput fullWidth id="fechaAlta" [nbDatepicker]="picker" name="fechaAlta" placeholder="Website"
+                  [(ngModel)]="empresa.fechaAlta">
+                <nb-datepicker #picker [max]="max"></nb-datepicker>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="representante" class="label">Representante</label>
+                <input type="text" nbInput fullWidth id="representante" name="representante"
+                  placeholder="Persona Moral del régimen general" [(ngModel)]="empresa.representante">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="cargo" class="label">Cargo</label>
+                <input type="text" nbInput fullWidth id="cargo" name="cargo" placeholder="Gerente"
+                  [(ngModel)]="empresa.cargo">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="rfc" class="label">RFC</label>
+                <input type="text" nbInput fullWidth id="rfc" name="rfc" placeholder="INUG84848HT"
+                  [(ngModel)]="empresa.rfc">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="curp" class="label">Curp</label>
+                <input type="text" nbInput fullWidth id="curp" name="curp" placeholder="JHGBTN54184565FGUH"
+                  [(ngModel)]="empresa.curp">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="registroPatronal" class="label">Registro Patronal</label>
+                <input type="text" nbInput fullWidth id="registroPatronal" name="registroPatronal"
+                  placeholder="332424324324234" [(ngModel)]="empresa.registroPatronal">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="tipoRiesgo" class="label">Tipo de riesgo</label>
+                <input type="text" nbInput fullWidth id="tipoRiesgo" name="tipoRiesgo" placeholder="Clase I"
+                  [(ngModel)]="empresa.tipoRiesgo">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="paginaWeb" class="label">Pagina web</label>
+                <input type="text" nbInput fullWidth id="paginaWeb" name="paginaWeb" placeholder="www.bioscan.com"
+                  [(ngModel)]="empresa.paginaWeb">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="paginaWeb" class="correo">Correo electronico</label>
+                <input type="email" nbInput fullWidth id="correo" name="correo" placeholder="bioscan@bioscan.com"
+                  [(ngModel)]="empresa.correo">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <button type="button" nbButton status="danger" [routerLink]="['/pages/administracion/empresas']"
+              routerLinkActive="router-link-active">Cancelar</button>
+            <button nbButton status="primary" (click)="create()" *ngIf="!empresa.id else elseBlock">Guardar</button>
+            <ng-template #elseBlock>
+              <button nbButton status="primary" (click)="update()">Actualizar</button>
+            </ng-template>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
