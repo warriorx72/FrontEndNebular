@@ -7,7 +7,7 @@ import { Empresa } from './empresa';
   providedIn: 'root',
 })
 export class EmpresaService {
-  private urlEndPoint = 'http://localhost:8080/api/empresas';
+  private urlEndPoint = 'http://localhost:8090/api/empresas';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
